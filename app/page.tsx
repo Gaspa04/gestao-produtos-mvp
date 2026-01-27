@@ -1,6 +1,7 @@
 import { supabase } from '../lib/supabase';
 import { Card } from '../components/ui/Card';
 import { Icons } from '../components/ui/Icons';
+import { RefreshButton } from '../components/dashboard/RefreshButton';
 
 async function getDashboard() {
   const salesRes = await supabase
@@ -35,11 +36,16 @@ async function getDashboard() {
 export default async function DashboardPage() {
   const { totalProfit, deliveredCount, pendingCount, totalPendingMinutes, totalPendingHours } = await getDashboard();
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      <Card title="Lucro total" icon={<Icons.DollarSign className="h-5 w-5 text-green-600" />} value={`R$ ${totalProfit.toFixed(2)}`} />
-      <Card title="Entregues" icon={<Icons.CheckCircle2 className="h-5 w-5 text-emerald-600" />} value={deliveredCount} />
-      <Card title="Pendentes" variant="warning" icon={<Icons.AlertTriangle className="h-5 w-5 text-yellow-600" />} value={pendingCount} />
-      <Card title="Tempo de impressão pendente" icon={<Icons.Clock className="h-5 w-5 text-blue-600" />} value={`${totalPendingHours.toFixed(2)} h`} subtext={`${totalPendingMinutes} min`} />
+    <div className="grid gap-4">
+      <div className="flex justify-end">
+        <RefreshButton />
+      </div>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card title="Lucro total" icon={<Icons.DollarSign className="h-5 w-5 text-green-600" />} value={`R$ ${totalProfit.toFixed(2)}`} />
+        <Card title="Entregues" icon={<Icons.CheckCircle2 className="h-5 w-5 text-emerald-600" />} value={deliveredCount} />
+        <Card title="Pendentes" variant="warning" icon={<Icons.AlertTriangle className="h-5 w-5 text-yellow-600" />} value={pendingCount} />
+        <Card title="Tempo de impressão pendente" icon={<Icons.Clock className="h-5 w-5 text-blue-600" />} value={`${totalPendingHours.toFixed(2)} h`} subtext={`${totalPendingMinutes} min`} />
+      </div>
     </div>
   );
 }
