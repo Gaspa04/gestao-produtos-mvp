@@ -1,4 +1,5 @@
-import { ReactNode } from 'react';
+import { ReactNode, HTMLAttributes } from 'react';
+import { clsx } from 'clsx';
 
 export function Table({ children }: { children: ReactNode }) {
   return (
@@ -26,6 +27,6 @@ export function TH({ children }: { children: ReactNode }) {
   return <th className="px-4 py-2 font-medium">{children}</th>;
 }
 
-export function TD({ children }: { children: ReactNode }) {
-  return <td className="px-4 py-2 align-middle">{children}</td>;
+export function TD({ children, className, ...props }: HTMLAttributes<HTMLTableCellElement> & { children: ReactNode }) {
+  return <td className={clsx('px-4 py-2 align-middle', className)} {...props}>{children}</td>;
 }
