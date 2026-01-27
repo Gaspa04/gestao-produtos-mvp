@@ -34,6 +34,11 @@ create table if not exists sales (
   sale_price numeric(12,2) not null check (sale_price >= 0),
   shipping_qr_code text not null,
   status sales_status not null,
+  customer_name text not null,
+  customer_cep text not null,
+  customer_street text not null,
+  customer_number text not null,
+  customer_complement text,
   created_at timestamp with time zone default timezone('utc', now())
 );
 

@@ -20,6 +20,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <a href="/products" className="text-gray-700 hover:text-black">Produtos</a>
                 <a href="/materials" className="text-gray-700 hover:text-black">Materiais</a>
                 <a href="/sales" className="text-gray-700 hover:text-black">Vendas</a>
+                <a href="/pendentes" className="text-yellow-600 hover:text-yellow-700 font-medium">⏳ Pendentes</a>
               </nav>
             </div>
           </header>
