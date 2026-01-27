@@ -2,6 +2,9 @@ import { supabase } from '../../lib/supabase';
 import { THead, TBody, TH, Table } from '../../components/ui/Table';
 import SalesRow from '../../components/sales/SalesRow';
 import CreateSalesForm from '../../components/sales/CreateSalesForm';
+import { RefreshButton } from '../../components/dashboard/RefreshButton';
+
+export const dynamic = 'force-dynamic';
 
 async function getSales() {
   const { data } = await supabase
@@ -26,7 +29,10 @@ export default async function SalesPage() {
   const [sales, refs] = await Promise.all([getSales(), getRefs()]);
   return (
     <div className="grid gap-6">
-      <h2 className="text-lg font-semibold">Cadastro de Vendas</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="text-lg font-semibold">Cadastro de Vendas</h2>
+        <RefreshButton />
+      </div>
       <CreateSalesForm refs={refs} />
       <Table>
         <THead>

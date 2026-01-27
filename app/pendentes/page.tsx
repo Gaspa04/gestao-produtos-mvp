@@ -1,5 +1,8 @@
 import { supabase } from '../../lib/supabase';
 import { THead, TBody, TH, TD, Table } from '../../components/ui/Table';
+import { RefreshButton } from '../../components/dashboard/RefreshButton';
+
+export const dynamic = 'force-dynamic';
 
 async function getPendingSales() {
   const { data } = await supabase
@@ -17,9 +20,12 @@ export default async function PendentesPage() {
 
   return (
     <div className="grid gap-6">
-      <div>
-        <h2 className="text-lg font-semibold">Vendas Pendentes</h2>
-        <p className="text-gray-600 text-sm mt-1">Total: {sales.length} venda(s) | Tempo: {totalHours.toFixed(2)}h ({totalTime}min)</p>
+      <div className="flex items-start justify-between">
+        <div>
+          <h2 className="text-lg font-semibold">Vendas Pendentes</h2>
+          <p className="text-gray-600 text-sm mt-1">Total: {sales.length} venda(s) | Tempo: {totalHours.toFixed(2)}h ({totalTime}min)</p>
+        </div>
+        <RefreshButton />
       </div>
 
       <Table>

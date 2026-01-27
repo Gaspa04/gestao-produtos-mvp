@@ -3,6 +3,8 @@ import { Card } from '../components/ui/Card';
 import { Icons } from '../components/ui/Icons';
 import { RefreshButton } from '../components/dashboard/RefreshButton';
 
+export const dynamic = 'force-dynamic';
+
 async function getDashboard() {
   const salesRes = await supabase
     .from('sales')
