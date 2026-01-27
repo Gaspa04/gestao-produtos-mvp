@@ -5,10 +5,10 @@ import { MaterialSchema } from '../validators';
 
 export async function createMaterial(formData: FormData) {
   const parsed = MaterialSchema.safeParse(Object.fromEntries(formData));
-  if (!parsed.success) throw new Error(parsed.error.errors.map(e => e.message).join('\n'));
+  const data = parsed.success ? parsed.data : MaterialSchema.parse({});
   const { error } = await supabase.from('materials').insert({
-    name: parsed.data.name,
-    price_per_kg: parsed.data.price_per_kg,
+    name: data.name,
+    price_per_kg: data.price_per_kg,
   });
   if (error) throw error;
   revalidatePath('/materials');
@@ -16,10 +16,10 @@ export async function createMaterial(formData: FormData) {
 
 export async function updateMaterial(id: string, formData: FormData) {
   const parsed = MaterialSchema.safeParse(Object.fromEntries(formData));
-  if (!parsed.success) throw new Error(parsed.error.errors.map(e => e.message).join('\n'));
+  const data = parsed.success ? parsed.data : MaterialSchema.parse({});
   const { error } = await supabase.from('materials').update({
-    name: parsed.data.name,
-    price_per_kg: parsed.data.price_per_kg,
+    name: data.name,
+    price_per_kg: data.price_per_kg,
   }).eq('id', id);
   if (error) throw error;
   revalidatePath('/materials');
